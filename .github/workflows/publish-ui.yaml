@@ -39,7 +39,6 @@ jobs:
         run: |
           DEPLOYMENT_URL=$(vercel deploy \
           --token ${{ secrets.VERCEL_TOKEN }} \
-          --org ${{ secrets.VERCEL_ORG_ID }} \
           --project ${{ secrets.VERCEL_PROJECT_ID_PLAYGROUND }} \
           --scope ${{ secrets.VERCEL_SCOPE }} \
           --target ${{ github.event.inputs.environment == 'prod' && 'production' || 'development' }} \
