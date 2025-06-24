@@ -38,6 +38,7 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
+      # Deploy To vercel and output the deployment URL as a GitHub output from the step
       - name: Deploy to Vercel
         id: deploy
         run: |
@@ -49,6 +50,7 @@ jobs:
           --cwd=apps/playground-ui)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
+      # Use the deployment URL to set an alias for the deployment
       - name: Set Alias
         run: |
           vercel alias set \
