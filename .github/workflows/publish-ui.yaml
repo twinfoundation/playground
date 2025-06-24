@@ -42,11 +42,11 @@ jobs:
         id: deploy
         run: |
           DEPLOYMENT_URL=$(vercel deploy \
-          --token ${{ secrets.VERCEL_TOKEN }} \
-          --scope ${{ secrets.VERCEL_SCOPE }} \
-          --target ${{ github.event.inputs.environment == 'prod' && 'Production' || 'Development' }} \
+          --token=${{ secrets.VERCEL_TOKEN }} \
+          --scope=${{ secrets.VERCEL_SCOPE }} \
+          --target=${{ github.event.inputs.environment == 'prod' && 'Production' || 'Development' }} \
           --force \
-          --cwd apps/playground-ui)
+          --cwd=apps/playground-ui)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
       - name: Set Alias
@@ -54,5 +54,5 @@ jobs:
           vercel alias set \
           ${{ steps.deploy.outputs.deployment-url }} \
           ${{ github.event.inputs.environment == 'prod' && secrets.DOMAIN_PLAYGROUND_PROD || secrets.DOMAIN_PLAYGROUND_DEV }} \
-          --token ${{ secrets.VERCEL_TOKEN }} \
-          --scope ${{ secrets.VERCEL_SCOPE }}
+          --token=${{ secrets.VERCEL_TOKEN }} \
+          --scope=${{ secrets.VERCEL_SCOPE }}
