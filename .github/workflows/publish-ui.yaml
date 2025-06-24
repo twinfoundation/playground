@@ -31,13 +31,11 @@ jobs:
         with:
           node-version: 20
 
-      # Install older version of Vercel CLI until this issue is fixed
-      # https://github.com/BetaHuhn/deploy-to-vercel-action/issues/393
       - name: Install Vercel CLI
-        run: npm install -g vercel@22.0.1
+        run: npm install -g vercel@canary
 
-      - name: Deploy to Vercel
-        uses: BetaHuhn/deploy-to-vercel-action@v1.10.0
+      - name: Deploy to Vercel - Fork of BetaHuhn/deploy-to-vercel-action supporting target option
+        uses: iotaledger/deploy-to-vercel-action@9c73fe8ff3eb32d6ba30d623ac1b0c5708a25bb7
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -45,7 +43,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PLAYGROUND }}
           VERCEL_SCOPE: ${{ secrets.VERCEL_SCOPE }}
           ALIAS_DOMAINS: ${{ github.event.inputs.environment == 'prod' && secrets.DOMAIN_PLAYGROUND_PROD || secrets.DOMAIN_PLAYGROUND_DEV }}
-          GITHUB_DEPLOYMENT_ENV: ${{ github.event.inputs.environment == 'prod' && 'Production' || 'Development' }}
           PRODUCTION: ${{ github.event.inputs.environment == 'prod' && true || false }}
           WORKING_DIRECTORY: apps/playground-ui
           FORCE: true
+          VERCEL_TARGET: ${{ github.event.inputs.environment == 'prod' && 'Production' || 'Development' }}
