@@ -44,7 +44,7 @@ jobs:
           DEPLOYMENT_URL=$(vercel deploy \
           --token ${{ secrets.VERCEL_TOKEN }} \
           --scope ${{ secrets.VERCEL_SCOPE }} \
-          --target ${{ github.event.inputs.environment == 'prod' && 'production' || 'development' }} \
+          --target ${{ github.event.inputs.environment == 'prod' && 'Production' || 'Development' }} \
           --force \
           --cwd apps/playground-ui)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
