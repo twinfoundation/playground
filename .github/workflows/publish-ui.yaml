@@ -2,13 +2,13 @@ name: Publish UI
 
 on:
   workflow_dispatch:
-   inputs:
+    inputs:
       environment:
         type: choice
         description: Environment
-        options: 
-        - dev
-        - prod
+        options:
+          - dev
+          - prod
 
 permissions:
   contents: read

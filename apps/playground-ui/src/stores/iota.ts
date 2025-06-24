@@ -9,10 +9,7 @@ let iotaNetwork = "";
  * @param envExplorerUrl The url for explorer.
  * @param envIotaNetwork The network of IOTA to use.
  */
-export async function init(
-	envExplorerUrl: string,
-	envIotaNetwork: string
-): Promise<void> {
+export async function init(envExplorerUrl: string, envIotaNetwork: string): Promise<void> {
 	explorerUrl = StringHelper.trimTrailingSlashes(envExplorerUrl);
 	iotaNetwork = envIotaNetwork;
 }
