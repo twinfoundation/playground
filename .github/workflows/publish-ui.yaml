@@ -1,0 +1,49 @@
+name: Publish UI
+
+on:
+  workflow_dispatch:
+   inputs:
+      environment:
+        type: choice
+        description: Environment
+        options: 
+        - dev
+        - prod
+
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    if: (github.ref == 'refs/heads/main' && github.event.inputs.environment == 'prod') || (github.ref == 'refs/heads/next' && github.event.inputs.environment == 'dev')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install older version of Vercel CLI until this issue is fixed
+      # https://github.com/BetaHuhn/deploy-to-vercel-action/issues/393
+      - name: Install Vercel CLI
+        run: npm install -g vercel@22.0.1
+
+      - name: Deploy to Vercel
+        uses: BetaHuhn/deploy-to-vercel-action@v1.10.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PLAYGROUND }}
+          VERCEL_SCOPE: ${{ secrets.VERCEL_SCOPE }}
+          ALIAS_DOMAINS: ${{ github.event.inputs.environment == 'prod' && secrets.DOMAIN_PLAYGROUND_PROD || secrets.DOMAIN_PLAYGROUND_DEV }}
+          PRODUCTION: true
+          WORKING_DIRECTORY: apps/playground-ui
+          FORCE: true
