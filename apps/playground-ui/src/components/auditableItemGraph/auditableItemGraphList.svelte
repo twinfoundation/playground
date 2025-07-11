@@ -12,7 +12,6 @@
 		Heading,
 		i18n,
 		Icons,
-		Label,
 		P,
 		Pagination,
 		Spinner,
@@ -55,7 +54,11 @@
 			canGoBackwards = cursorHandler.canGoBackwards();
 			canGoForwards = cursorHandler.canGoForwards();
 
-			status = '';
+			if (!Is.arrayValue(items)) {
+				status = $i18n('pages.auditableItemGraphList.noItems');
+			} else {
+				status = '';
+			}
 		}
 
 		busy = false;
@@ -83,14 +86,15 @@
 			{#if busy}
 				<Spinner />
 			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
 		</div>
 		<Button on:click={() => goto('/secure/auditable-item-graph/create')} disabled={busy}
 			>{$i18n('pages.auditableItemGraphList.createItem')}</Button
 		>
 	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(items)}
 		<Table>
@@ -122,9 +126,5 @@
 			</TableBody>
 		</Table>
 		<Pagination {loadNext} {loadPrevious} {canGoBackwards} {canGoForwards} disabled={busy} />
-	{:else}
-		<Label>
-			{$i18n('pages.auditableItemGraphList.noItems')}
-		</Label>
 	{/if}
 </section>
