@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/playground-node",
-	"version": "0.0.1-next.1",
+	"version": "0.0.1",
 	"description": "Serve APIs using the specified configuration",
 	"private": true,
 	"repository": {
@@ -30,18 +30,18 @@
 		"prepare": "ts-patch install -s"
 	},
 	"dependencies": {
-		"@twin.org/core": "next",
-		"@twin.org/engine": "next",
-		"@twin.org/engine-types": "next",
-		"@twin.org/node-core": "next",
-		"@twin.org/entity": "next"
+		"@twin.org/core": "^0.0.1",
+		"@twin.org/engine": "^0.0.2-next.1",
+		"@twin.org/engine-types": "^0.0.2-next.1",
+		"@twin.org/node-core": "^0.0.1",
+		"@twin.org/entity": "^0.0.1"
 	},
 	"devDependencies": {
-		"@twin.org/entity-storage-connector-memory": "next",
-		"@twin.org/merge-locales": "next",
-		"@twin.org/nameof-transformer": "next",
-		"@twin.org/nameof-vitest-plugin": "next",
-		"@twin.org/ts-to-openapi": "next",
+		"@twin.org/entity-storage-connector-memory": "^0.0.1",
+		"@twin.org/merge-locales": "^0.0.1",
+		"@twin.org/nameof-transformer": "^0.0.1",
+		"@twin.org/nameof-vitest-plugin": "^0.0.1",
+		"@twin.org/ts-to-openapi": "^0.0.1",
 		"@types/node": "24.0.1",
 		"@vitest/coverage-v8": "3.2.3",
 		"concurrently": "9.1.2",
