@@ -8,7 +8,7 @@ First follow one of the many online guides to create your EC2 instance with the 
 
 Network requirements are for the `https` port to be open to any address range i.e. `0.0.0.0`.
 
-You should alias a domain name to the IP address of the instance e.g. `playground-api.example.com` using your DNS provider e.g. Cloudflare.
+You should alias a domain name to the IP address of the instance e.g. `playground-api.twindev.org` using your DNS provider e.g. Cloudflare.
 
 ## Install Git
 
@@ -16,7 +16,7 @@ For retrieving the code from the repo.
 
 ```shell
 sudo yum install git -y
-git -version
+git --version
 ```
 
 ## Install NVM and Node
@@ -38,6 +38,14 @@ sudo yum install nginx -y
 nginx -v
 ```
 
+## Create Self-Signed Certificate
+
+```shell
+sudo mkdir /etc/ssl/private/
+sudo mkdir /etc/ssl/certs/
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+```
+
 ## Configuring nginx
 
 We need to configure nginx to use the certificate and reverse proxy https traffic to the node server.
@@ -51,7 +59,7 @@ The configuration should be along the lines of:
 ```shell
 server {
     listen 80;
-    server_name playground-api.example.com;
+    server_name playground-api.twindev.org;
 
     # Redirect all traffic
     return 301 https://$server_name$request_uri;
@@ -61,7 +69,7 @@ server {
     listen [::]:443 ssl ipv6only=on;
     listen 443 ssl;
 
-    server_name playground-api.example.com;
+    server_name playground-api.twindev.org;
 
     ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
@@ -95,7 +103,7 @@ We clone the repo, build it and then make a copy of the relevant .env file.
 
 ```shell
 git clone https://github.com/twinfoundation/playground.git
-cd apps
+cd playground
 npm install
 cd apps/playground-node
 npm run dist
@@ -116,7 +124,7 @@ You can now bootstrap the server, this will initialise all the required services
 node ./dist/es/index.js
 ```
 
-You should also now be able to access the server at `https://playground-api.example.com`
+You should also now be able to access the server at `https://playground-api.twindev.org`
 
 ## Configure the server to restart with server
 
@@ -134,7 +142,7 @@ Description=Playground Node
 After=network.target
 
 [Service]
-ExecStart=/home/ec2-user/.nvm/versions/node/v20.16.0/bin/node /home/ec2-user/playground/apps/playground-node/dist/es/index.js
+ExecStart=/home/ec2-user/.nvm/versions/node/v20.19.3/bin/node /home/ec2-user/playground/apps/playground-node/dist/es/index.js
 Restart=always
 User=ec2-user
 Group=ec2-user
@@ -172,7 +180,7 @@ To upgrade a previous installation on an EC2 instance with the latest version.
 
 ```shell
 sudo systemctl stop playground.service
-cd apps
+cd playground
 git reset --hard
 git pull
 npm i

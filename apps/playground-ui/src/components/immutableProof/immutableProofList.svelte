@@ -104,14 +104,15 @@
 			{#if busy}
 				<Spinner />
 			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
 		</div>
 		<Button on:click={() => goto('/secure/immutable-proof/create')} disabled={busy}
 			>{$i18n('pages.immutableProof.createProof')}</Button
 		>
 	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(items)}
 		<Table>

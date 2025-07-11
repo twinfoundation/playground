@@ -9,7 +9,6 @@
 		Heading,
 		i18n,
 		Icons,
-		Label,
 		ModalYesNo,
 		P,
 		Spinner,
@@ -46,7 +45,12 @@
 		} else if (Is.object(result?.item)) {
 			ruleGroup = result.item;
 			rules = result.item.rules;
-			status = '';
+
+			if (rules.length === 0) {
+				status = $i18n('pages.dataProcessingRuleGroupRuleList.noItems');
+			} else {
+				status = '';
+			}
 		}
 		busy = false;
 	}
@@ -90,9 +94,6 @@
 			{#if busy}
 				<Spinner />
 			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
 		</div>
 	</div>
 
@@ -103,6 +104,10 @@
 			disabled={busy}>{$i18n('pages.dataProcessingRuleGroupRuleList.createRule')}</Button
 		>
 	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(rules)}
 		<Table>
@@ -140,10 +145,6 @@
 			yesAction={async () => remove()}
 			noAction={async () => removeCancel()}
 		/>
-	{:else}
-		<Label>
-			{$i18n('pages.dataProcessingRuleGroupRuleList.noItems')}
-		</Label>
 	{/if}
 	<div class="flex flex-row gap-2">
 		<Button on:click={() => goto(returnUrl)}>{$i18n('actions.back')}</Button>

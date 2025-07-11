@@ -15,18 +15,18 @@ import { UserVerifiableStorageEntry } from "./entities/userVerifiableStorageEntr
 
 await run({
 	serverName: "Playground Node",
-	serverVersion: "0.0.1-next.0", // x-release-please-version
+	serverVersion: "0.0.1-next.1", // x-release-please-version
 	envPrefix: "PLAYGROUND_",
 	localesDirectory: path.resolve("dist/locales"),
 	openApiSpecFile: path.resolve("docs/open-api/spec.json"),
-	extendConfig: extendEngineConfig
+	extendConfig
 });
 
 /**
  * Extends the engine config with types specific to playground.
  * @param engineConfig The engine configuration.
  */
-export async function extendEngineConfig(engineConfig: IEngineConfig): Promise<void> {
+export async function extendConfig(engineConfig: IEngineConfig): Promise<void> {
 	// Add a custom entity storage type for the users attestations,
 	// but only if the attestation connectors are available.
 	if (Is.arrayValue(engineConfig.types.attestationConnector)) {

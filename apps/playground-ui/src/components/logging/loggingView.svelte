@@ -127,11 +127,9 @@
 			{#if busy}
 				<Spinner />
 			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
 		</div>
 	</div>
+
 	<Card class="w-full max-w-full rounded-lg border border-gray-300 p-4">
 		<div class="block flex-row gap-2 lg:flex">
 			<Label>
@@ -191,6 +189,10 @@
 			</Button>
 		</div>
 	</Card>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(entities)}
 		<Table>

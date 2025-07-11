@@ -124,19 +124,6 @@
 
 <section class="flex flex-col items-start justify-center gap-5">
 	<Heading tag="h4">{$i18n('pages.rightsManagement.title')}</Heading>
-	<div class="items-left flex flex-col justify-between gap-2 sm:w-full sm:flex-row sm:items-center">
-		<div class="flex flex-row gap-2">
-			{#if busy}
-				<Spinner />
-			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
-		</div>
-		<Button on:click={() => goto('/secure/rights-management/create')} disabled={busy}
-			>{$i18n('pages.rightsManagement.createPolicy')}</Button
-		>
-	</div>
 	<Card class="w-full max-w-full rounded-lg border border-gray-300 p-4">
 		<div class="block flex-row gap-2 lg:flex">
 			<Label>
@@ -164,6 +151,22 @@
 			</Button>
 		</div>
 	</Card>
+
+	<div class="items-left flex flex-col justify-between gap-2 sm:w-full sm:flex-row sm:items-center">
+		<div class="flex flex-row gap-2">
+			{#if busy}
+				<Spinner />
+			{/if}
+		</div>
+		<Button on:click={() => goto('/secure/rights-management/create')} disabled={busy}
+			>{$i18n('pages.rightsManagement.createPolicy')}</Button
+		>
+	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
+
 	{#if Is.arrayValue(items)}
 		<Table>
 			<TableHead>

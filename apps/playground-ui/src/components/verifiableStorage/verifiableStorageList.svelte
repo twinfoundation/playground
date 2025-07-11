@@ -107,14 +107,15 @@
 			{#if busy}
 				<Spinner />
 			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
 		</div>
 		<Button on:click={() => goto('/secure/verifiable-storage/create')} disabled={busy}
 			>{$i18n('pages.verifiableStorage.createItem')}</Button
 		>
 	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(items)}
 		<Table>

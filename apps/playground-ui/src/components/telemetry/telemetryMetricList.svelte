@@ -111,16 +111,6 @@
 
 <section class="flex flex-col items-start justify-center gap-5">
 	<Heading tag="h4">{$i18n('pages.telemetry.title')}</Heading>
-	<div class="items-left flex flex-col justify-between gap-2 sm:w-full sm:flex-row sm:items-center">
-		<div class="flex flex-row gap-2">
-			{#if busy}
-				<Spinner />
-			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
-		</div>
-	</div>
 
 	<Card class="w-full max-w-full rounded-lg border border-gray-300 p-4">
 		<div class="flex flex-col gap-4 lg:flex-row">
@@ -150,11 +140,20 @@
 		</div></Card
 	>
 
-	<div class="flex w-full justify-end">
+	<div class="items-left flex flex-col justify-between gap-2 sm:w-full sm:flex-row sm:items-center">
+		<div class="flex flex-row gap-2">
+			{#if busy}
+				<Spinner />
+			{/if}
+		</div>
 		<Button on:click={() => goto('/secure/telemetry/create')} disabled={busy}
 			>{$i18n('pages.telemetry.createMetric')}</Button
 		>
 	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(entities)}
 		<Table>

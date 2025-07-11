@@ -104,14 +104,15 @@
 			{#if busy}
 				<Spinner />
 			{/if}
-			{#if Is.stringValue(status)}
-				<P class={isError ? 'text-red-600' : ''}>{status}</P>
-			{/if}
 		</div>
 		<Button on:click={() => goto('/secure/nft/mint')} disabled={busy}
 			>{$i18n('pages.nft.mintItem')}</Button
 		>
 	</div>
+
+	{#if Is.stringValue(status)}
+		<P class={isError ? 'text-red-600' : ''}>{status}</P>
+	{/if}
 
 	{#if Is.arrayValue(items)}
 		<Table>
