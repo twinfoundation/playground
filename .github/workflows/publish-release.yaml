@@ -79,7 +79,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org' # Set NPM registry URL
 
       # Setup any services required for tests here
-
+      - name: Create example config
+        run: |
+          cd apps/playground-ui
+          cp .env.example .env
       # End setup for tests
 
       # Remove the root package.json to prevent dependency conflicts
