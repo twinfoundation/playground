@@ -718,7 +718,8 @@
 			"transferFailed": "The wallet transfer failed."
 		},
 		"iotaFaucetConnector": {
-			"fundingFailed": "Fund the address from faucet failed"
+			"fundingFailed": "Fund the address from faucet failed",
+			"faucetRateLimit": "Faucet rate limit exceeded"
 		},
 		"rightsManagement": {
 			"policyUidRequired": "Policy UID is required",
