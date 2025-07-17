@@ -10,7 +10,8 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: No setup
+    - name: Setup Test Environment
       shell: bash
       run: |
-        echo "No setup required for this action. It is a placeholder for the testing environment setup."
+          cd apps/playground-ui
+          cp .env.example .env
