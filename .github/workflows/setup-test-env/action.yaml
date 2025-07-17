@@ -13,5 +13,5 @@ runs:
     - name: Setup Test Environment
       shell: bash
       run: |
-          cd apps/playground-ui
-          cp .env.example .env
+        cd apps/playground-ui
+        cp .env.example .env
