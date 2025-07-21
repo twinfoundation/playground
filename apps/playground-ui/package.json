@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/playground-ui",
-	"version": "0.0.1-next.0",
+	"version": "0.0.2-next.0",
 	"description": "UI to demonstrate the APIs",
 	"private": true,
 	"scripts": {
@@ -61,20 +61,20 @@
 	"devDependencies": {
 		"@playwright/test": "1.54.1",
 		"@sveltejs/adapter-auto": "6.0.1",
-		"@sveltejs/kit": "2.21.4",
-		"svelte": "5.34.1",
-		"@sveltejs/vite-plugin-svelte": "5.1.0",
+		"@sveltejs/kit": "2.25.1",
+		"svelte": "5.36.12",
+		"@sveltejs/vite-plugin-svelte": "6.1.0",
 		"@twin.org/merge-locales": "next",
 		"@types/d3": "7.4.3",
 		"autoprefixer": "10.4.21",
-		"globals": "16.0.0",
-		"postcss": "8.5.3",
+		"globals": "16.3.0",
+		"postcss": "8.5.6",
 		"rollup-plugin-copy": "3.5.0",
-		"svelte-check": "4.2.1",
+		"svelte-check": "4.3.0",
 		"tailwindcss": "3.4.17",
 		"typescript": "5.8.3",
-		"vite": "6.3.5",
-		"vitest": "3.2.3"
+		"vite": "7.0.5",
+		"vitest": "3.2.4"
 	},
 	"type": "module"
 }
