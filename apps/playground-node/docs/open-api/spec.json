@@ -618,7 +618,7 @@
 				"parameters": [
 					{
 						"name": "email",
-						"description": "",
+						"description": "The user email.",
 						"in": "path",
 						"required": true,
 						"schema": {
@@ -633,6 +633,26 @@
 						"jwtBearerAuthScheme": []
 					}
 				],
+				"requestBody": {
+					"description": "Update a users password.",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePasswordRequest"
+							},
+							"examples": {
+								"updatePasswordRequestExample": {
+									"summary": "The request to update the user's password.",
+									"value": {
+										"currentPassword": "MyNewPassword123!",
+										"newPassword": "MyNewPassword123!"
+									}
+								}
+							}
+						}
+					}
+				},
 				"responses": {
 					"204": {
 						"description": "The rest request ended in success with no data."
@@ -14806,6 +14826,25 @@
 				],
 				"additionalProperties": false,
 				"description": "The response payload."
+			},
+			"UpdatePasswordRequest": {
+				"type": "object",
+				"properties": {
+					"currentPassword": {
+						"type": "string",
+						"description": "The current password for the user."
+					},
+					"newPassword": {
+						"type": "string",
+						"description": "The new password for the user."
+					}
+				},
+				"required": [
+					"currentPassword",
+					"newPassword"
+				],
+				"additionalProperties": false,
+				"description": "The body of the request."
 			},
 			"VerifiableStorageCreateRequest": {
 				"type": "object",
